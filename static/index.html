@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<link rel="stylesheet" href="static/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анонимный опрос</title>
+    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+</head>
+<body>
+    <h1>Анонимный опрос</h1>
+    <form id="survey-form" hx-post="/submit" hx-trigger="submit" hx-target="#result" hx-swap="innerHTML" onsubmit="document.getElementById('survey-form').style.display='none'">
+        <label>Оцените от 0 до 10:</label>
+        <input type="number" name="rating" min="0" max="10" required><br>
+        
+        <label>Ваш отзыв:</label>
+        <textarea name="feedback" required></textarea><br>
+        
+        <button type="submit">Отправить</button>
+    </form>
+    
+    <div id="result"></div>
+</body>
+</html>

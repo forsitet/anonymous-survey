@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+
+  app:
+    build: .
+    container_name: survey_app
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+
+  pgadmin4:
+      image: elestio/pgadmin:latest
+      container_name: pgadmin
+      restart: always
+      ports:
+        - "5050:80"
+      volumes:
+        - ./servers.json:/pgadmin4/servers.json
+      env_file:
+        - .env
+      
+
+
+volumes:
+  postgres_data:
